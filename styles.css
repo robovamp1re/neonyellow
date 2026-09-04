@@ -1,0 +1,337 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --yellow: #eaff00;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--black);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.5vw;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.brand-mark,
+.menu-toggle {
+  pointer-events: auto;
+}
+
+.brand-mark,
+.hero-mark {
+  display: block;
+  width: 54px;
+  height: 54px;
+  background: var(--yellow);
+}
+
+.menu-toggle {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: transparent;
+  padding: 12px 4px;
+  cursor: pointer;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--black);
+  transition: transform 250ms ease, opacity 200ms ease;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: min(900px, 90vw);
+  text-align: center;
+  margin-top: -4vh;
+}
+
+.hero-mark {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 58px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.3rem, 5.2vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.24em;
+  font-weight: 500;
+  padding-left: 0.24em;
+}
+
+.production {
+  margin: 26px 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.75rem);
+  letter-spacing: 0.48em;
+  padding-left: 0.48em;
+  font-weight: 300;
+}
+
+.rule {
+  width: 88px;
+  height: 2px;
+  background: var(--black);
+  margin: 48px auto 42px;
+}
+
+.coming-soon {
+  margin: 0;
+  font-size: clamp(0.85rem, 1.25vw, 1.05rem);
+  letter-spacing: 0.62em;
+  padding-left: 0.62em;
+  font-weight: 400;
+}
+
+.cinema-image {
+  position: absolute;
+  z-index: 1;
+  right: -1vw;
+  bottom: -7vh;
+  width: min(48vw, 760px);
+  height: min(72vh, 760px);
+  background: url("assets/hero-camera.png") center right / cover no-repeat;
+  filter: grayscale(1);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.cinema-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--white) 0%, rgba(255,255,255,0.75) 13%, rgba(255,255,255,0) 48%);
+}
+
+.contact {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 120px 8vw;
+  border-top: 1px solid #e7e7e7;
+  background: var(--white);
+}
+
+.contact-inner {
+  width: min(800px, 100%);
+}
+
+.eyebrow {
+  margin: 0 0 30px;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+}
+
+.contact h2 {
+  max-width: 700px;
+  margin: 0 0 42px;
+  font-size: clamp(2rem, 4vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+
+.email-link {
+  color: var(--black);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  text-decoration: none;
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 5px;
+}
+
+.email-link:hover {
+  background: var(--yellow);
+}
+
+.site-footer {
+  padding: 28px 4.5vw;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid #e7e7e7;
+}
+
+.site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--black);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+
+.site-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-inner {
+  display: grid;
+  gap: 18px;
+  text-align: center;
+}
+
+.menu-inner a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  transition: color 150ms ease;
+}
+
+.menu-inner a:hover {
+  color: var(--yellow);
+}
+
+.menu-close {
+  position: absolute;
+  top: 34px;
+  right: 4.5vw;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 3rem;
+  font-weight: 200;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    height: 86px;
+    padding: 0 6vw;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-content {
+    margin-top: -10vh;
+  }
+
+  .hero-mark {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 38px;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    letter-spacing: 0.16em;
+    padding-left: 0.16em;
+  }
+
+  .production {
+    margin-top: 18px;
+    font-size: 0.9rem;
+    letter-spacing: 0.34em;
+    padding-left: 0.34em;
+  }
+
+  .rule {
+    margin: 34px auto 30px;
+  }
+
+  .coming-soon {
+    font-size: 0.7rem;
+    letter-spacing: 0.42em;
+    padding-left: 0.42em;
+  }
+
+  .cinema-image {
+    right: -18vw;
+    bottom: -3vh;
+    width: 82vw;
+    height: 52vh;
+    opacity: 0.48;
+  }
+
+  .contact {
+    min-height: 60vh;
+    padding: 100px 8vw;
+  }
+
+  .contact h2 {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+
+  .menu-inner a {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
